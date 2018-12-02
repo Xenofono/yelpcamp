@@ -1,0 +1,107 @@
+<%include ../partials/header %>
+
+    <%moment.locale("sv");%>
+    <div class="row">
+        <div class="col-lg-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>    
+            <div class="col-lg-9">
+
+                    <div class="card">
+                        <img src="<%=campground.image%>" class="card-img-top">
+                        <div class="card-body">
+                            <% if (campground.price == null || campground.price == 0){%>
+                                <h4 class="float-right">Gratis</h4>
+                            <%}else{%>
+                                <h4 class="float-right"><%=campground.price%> kr/natten</h4>
+                            <%}%>
+                            <a href=""><h4 ><%=campground.name%></h4></a>
+                            <em><p>Inlagd av: <%=campground.author.username%>, <%= moment(campground.createdAt).fromNow() %></p></em>
+                            
+                            <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-warning btn-sm" href="./<%=campground.id%>/edit">Redigera</a>
+                            <form class="deleteknapp" action="/campgrounds/<%=campground.id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger btn-sm">Ta bort</button>
+                            </form>
+                            </div>
+                            <%}%>
+                            
+                            <p class="card-text mt-2">
+                                <%=campground.description%>  
+                            </p>
+                            
+                            
+                        </div>
+
+                    </div>
+                    <div class="card bg-light">
+                        <div class="text-right">
+                            <a class="btn btn-outline-success mt-2 mr-3" href="./<%=campground.id%>/comments/new">Ny kommentar</a>
+                        </div>
+                        <hr>
+                        <%campground.comments.forEach(function(comment){%>
+                            <div class="row mx-1">
+                                <div class="col-md-12">
+                                    <i class="fas fa-comment"></i><strong><%=comment.author.username%></strong>
+                                    <span class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
+                                     <p class="text mx-2">
+                                        <%=comment.text%>
+                                    </p>
+                                    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <div class="d-flex justify-content-end">
+                                    <a class="btn btn-sm btn-warning" 
+                                        href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"> Redigera
+                                    </a>
+                                    <form class="deleteknapp" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                        <input type="submit" class="btn btn-sm btn-danger" value="Radera">    
+                                        
+                                    </form>
+                                    </div>
+                                    <%}%>
+                                </div>
+                            </div>
+            
+              
+                 
+                 
+        <%})%>
+                        
+                    </div>
+                        
+
+             
+                
+            </div>
+        </div>
+    
+
+
+
+
+        
+        
+    </div> 
+</div>   
+<div class="text-left">
+    <p class="my-4">
+       
+       
+    </p>
+    
+<div class="d-inline-flex flex-column text-left">
+    
+    
+</div>
+</div>
+        
+        
+
+
+
+<%include ../partials/footer %>
