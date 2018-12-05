@@ -31,11 +31,12 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     var name = req.body.name;
     var imgurl = req.body.image;
     var desc = req.body.description;
+    var price = req.body.price;
     var author = {
         id: req.user._id,
         username: req.user.username
     }
-    var newcampground = { name: name, image: imgurl, description: desc, author: author };
+    var newcampground = { name: name, image: imgurl, description: desc, price: price, author: author };
     Campground.create(newcampground, function(err, newCamp) {
         if (err)
             console.log("FEL FEL FEL");

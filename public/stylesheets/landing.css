@@ -7,6 +7,15 @@ body {
     position: relative;
     text-align: center;
     padding-top: 40vh;
+    animation: 1s slidein 2s forwards;
+    opacity: 0;
+}
+
+@keyframes slidein {
+    100% {
+        opacity: 1;
+        margin: 0;
+    }
 }
 
 #landing-header h1 {
