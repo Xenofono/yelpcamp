@@ -17,11 +17,12 @@ var commentRoutes = require("./routes/comments"),
     indexRoutes = require("./routes/index");
 
 
-//seedDB();
+
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
 
 //DEVELOPMENT = mongodb://localhost/yelp_camp
 //PRODUKTION = mlab
-mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(url);
 
 
 console.log(process.env.DATABASEURL);
