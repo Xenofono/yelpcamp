@@ -20,7 +20,7 @@ var commentRoutes = require("./routes/comments"),
 //seedDB();
 
 //DEVELOPMENT = mongodb://localhost/yelp_camp
-//PRODUKTION = mongoose.connect("mongodb://kristoffer:sa94krna@ds127094.mlab.com:27094/yelpcamping");
+//PRODUKTION = mlab
 mongoose.connect(process.env.DATABASEURL);
 
 
